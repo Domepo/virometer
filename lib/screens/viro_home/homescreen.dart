@@ -10,7 +10,7 @@ class ViroApp extends StatelessWidget {
           appBar: HomeAppBar.getAppBar(),
           body: Container(
               margin: EdgeInsets.only(left: 20, top: 10, right: 20, bottom: 50),
-              height: 150,
+              height: 155,
               width: double.infinity,
               decoration: BoxDecoration(
                   color: Colors.white,
@@ -32,11 +32,11 @@ class ViroApp extends StatelessWidget {
                     alignment: Alignment.center,
                     child: Text("SARS-CoV-2 / Covid-19",
                         style:
-                            TextStyle(fontSize: 18, color: Color(0xff3A0CA3)))),
-                const Divider(
+                            TextStyle(fontSize: 18, color: Color(0xff3A0CA3), fontWeight: FontWeight.w600))),
+                Divider(
                   color: Colors.grey,
                   height: 20,
-                  thickness: 0.5,
+                  thickness: 0.2,
                   indent: 0,
                   endIndent: 0,
                 ),
@@ -46,14 +46,13 @@ class ViroApp extends StatelessWidget {
                         style:
                             TextStyle(fontSize: 13, color: Color(0xff6E6E6E)))),
                 Row(
-                  // crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    Expanded(
-                        child: Text("77.432.103",
-                            style: TextStyle(
-                                fontSize: 20,
-                                color: Color(0xff3A0CA3),
-                                fontWeight: FontWeight.bold))),
+                    Text("77.432.103",
+                        style: TextStyle(
+                            fontSize: 20,
+                            color: Color(0xff3A0CA3),
+                            fontWeight: FontWeight.bold)),
                     Text("1.704.065",
                         style: TextStyle(
                             fontSize: 20,
@@ -62,14 +61,13 @@ class ViroApp extends StatelessWidget {
                   ],
                 ),
                 Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    Expanded(
-                        child: Text("Fälle",
-                            style: TextStyle(
-                              fontSize: 13,
-                              color: Color(0xff3A0CA3),
-                            ))),
+                    Text("Fälle",
+                        style: TextStyle(
+                          fontSize: 13,
+                          color: Color(0xff3A0CA3),
+                        )),
                     Text("Tode",
                         style: TextStyle(
                           fontSize: 13,
@@ -77,6 +75,17 @@ class ViroApp extends StatelessWidget {
                         )),
                   ],
                 ),
+                Divider(
+                  color: Colors.grey,
+                  height: 20,
+                  thickness: 0.2,
+                  indent: 0,
+                  endIndent: 0,
+                ), Align(
+                    alignment: Alignment.center,
+                    child: Text("Füge eine Region hinzu",
+                        style:
+                            TextStyle(fontSize: 13, color: Color(0xff6E6E6E)))),
               ])),
         ));
   }
