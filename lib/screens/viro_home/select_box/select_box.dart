@@ -1,15 +1,18 @@
-import 'package:flutter/material.dart';
-import 'package:virometer/modules/countrys/germany/rki_request.dart';
+import 'dart:convert';
 
-class SelectBox extends StatelessWidget  {
+import 'package:flutter/material.dart';
+import 'package:virometer/modules/countrys/germany/corona_request.dart';
+import 'package:http/http.dart' as http;
+
+class SelectBox extends StatelessWidget {
   final String _virusTitle;
   final String _virusRegion;
   final String _virusCases;
   final String _virusDeaths;
 
-
+  SelectBox(
+      this._virusTitle, this._virusRegion, this._virusCases, this._virusDeaths);
   
-  SelectBox(this._virusTitle,this._virusRegion,this._virusCases,this._virusDeaths);
   @override
   Widget build(BuildContext context) {
 
