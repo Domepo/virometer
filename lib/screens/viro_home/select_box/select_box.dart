@@ -1,7 +1,16 @@
 import 'package:flutter/material.dart';
 // sd
-class SelectBox {
-  static getSelectBox() {
+class SelectBox extends StatelessWidget  {
+  final String _virusTitle;
+  final String _virusRegion;
+  final String _virusCases;
+  final String _virusDeaths;
+
+
+
+  SelectBox(this._virusTitle,this._virusRegion,this._virusCases,this._virusDeaths);
+  @override
+  Widget build(BuildContext context) {
     return Container(
         margin: EdgeInsets.only(left: 10, top: 10, right: 10, bottom: 10),
         height: 155,
@@ -24,7 +33,7 @@ class SelectBox {
         child: Column(children: [
           Align(
               alignment: Alignment.center,
-              child: Text("SARS-CoV-2 / Covid-19",
+              child: Text(_virusTitle,
                   style: TextStyle(
                       fontSize: 18,
                       color: Color(0xff3A0CA3),
@@ -38,17 +47,17 @@ class SelectBox {
           ),
           Align(
               alignment: Alignment.center,
-              child: Text("Weltweit",
+              child: Text(_virusRegion,
                   style: TextStyle(fontSize: 13, color: Color(0xff6E6E6E)))),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              Text("77.432.103",
+              Text(_virusCases,
                   style: TextStyle(
                       fontSize: 20,
                       color: Color(0xff3A0CA3),
                       fontWeight: FontWeight.bold)),
-              Text("1.704.065",
+              Text(_virusDeaths,
                   style: TextStyle(
                       fontSize: 20,
                       color: Color(0xff3A0CA3),

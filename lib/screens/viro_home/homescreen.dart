@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'homescreen_appbar.dart';
 import 'select_box/select_box.dart';
 class ViroApp extends StatelessWidget {
-  final selectVirusBox = SelectBox.getSelectBox();
+  // final selectVirusBox = SelectBox();
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -11,7 +11,7 @@ class ViroApp extends StatelessWidget {
           appBar: HomeAppBar.getAppBar(),
           body:ListView(
           children: [
-            selectVirusBox,selectVirusBox,selectVirusBox,selectVirusBox,selectVirusBox,selectVirusBox,selectVirusBox,selectVirusBox,
+           SelectBox("Corona", "Deutschland", "3000", "33")
           ],
         )
         ));
