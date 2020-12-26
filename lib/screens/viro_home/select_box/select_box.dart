@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-// sd
+import 'package:virometer/modules/countrys/germany/rki_request.dart';
+
 class SelectBox extends StatelessWidget  {
   final String _virusTitle;
   final String _virusRegion;
@@ -7,10 +8,11 @@ class SelectBox extends StatelessWidget  {
   final String _virusDeaths;
 
 
-
+  
   SelectBox(this._virusTitle,this._virusRegion,this._virusCases,this._virusDeaths);
   @override
   Widget build(BuildContext context) {
+
     return Container(
         margin: EdgeInsets.only(left: 10, top: 10, right: 10, bottom: 10),
         height: 155,
