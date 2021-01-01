@@ -45,7 +45,7 @@ class _ViroAppState extends State<ViroApp> {
     return MaterialApp(
         theme: ThemeData(fontFamily: 'Montserrat'),
         home: new Scaffold(
-            // appBar: HomeAppBar.getAppBar(),
+             appBar: HomeAppBar.getAppBar(),
             body: Container(
               child: FutureBuilder<CovidGerStates>(
                 future: _covidGerStates,
@@ -54,21 +54,15 @@ class _ViroAppState extends State<ViroApp> {
                     return ListView.builder(
                         itemCount: snapshot.data.features.length,
                         itemBuilder: (context, index) {
-                          var ttt = snapshot.data.features[index];
-                          return Container(
-                              height: 200,
-                              child: ListView(
-                                children: <Widget>[
-                                  SelectBox("Corona", "Deutschland", "3", "33")
-                                ],
-                              ));
+                          var covidAtrbs = snapshot.data.features[index];
+                          return SelectBox("Corona", covidAtrbs.attributes.county, covidAtrbs.attributes.cases.toString(), covidAtrbs.attributes.deaths.toString());
                         });
                   } else {
                     return Center(child: CircularProgressIndicator());
                   }
                 },
               ),
-              // ,
+              // SelectBox("Corona", "Deutschland", "3", "33")
             )));
   }
 }
