@@ -45,30 +45,30 @@ class _ViroAppState extends State<ViroApp> {
     return MaterialApp(
         theme: ThemeData(fontFamily: 'Montserrat'),
         home: new Scaffold(
-            appBar: HomeAppBar.getAppBar(),
+            // appBar: HomeAppBar.getAppBar(),
             body: Container(
-          child: FutureBuilder<CovidGerStates>(
-            future: _covidGerStates,
-            builder: (context, snapshot) {
-              if (snapshot.hasData) {
-                return ListView.builder(
-                    itemCount: snapshot.data.features.length,
-                    itemBuilder: (context, index) {
-                      var ttt = snapshot.data.features[index];
-                      return Container(
-                          height: 100,
-                          child: Row(
-                            children: <Widget>[
-                              Text(ttt.attributes.cases.toString())
-                            ],
-                          ));
-                    });
-              } else {
-                return Center(child: CircularProgressIndicator());
-              }
-            },
-          ),
-        // SelectBox("Corona", "Deutschland", "3", "33"),
-        )));
+              child: FutureBuilder<CovidGerStates>(
+                future: _covidGerStates,
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    return ListView.builder(
+                        itemCount: snapshot.data.features.length,
+                        itemBuilder: (context, index) {
+                          var ttt = snapshot.data.features[index];
+                          return Container(
+                              height: 200,
+                              child: ListView(
+                                children: <Widget>[
+                                  SelectBox("Corona", "Deutschland", "3", "33")
+                                ],
+                              ));
+                        });
+                  } else {
+                    return Center(child: CircularProgressIndicator());
+                  }
+                },
+              ),
+              // ,
+            )));
   }
 }
