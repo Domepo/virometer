@@ -1,15 +1,15 @@
 // To parse this JSON data, do
 //
-//     final welcome = welcomeFromJson(jsonString);
+//     final covidGerStates = covidGerStatesFromJson(jsonString);
 
 import 'dart:convert';
 
-Welcome welcomeFromJson(String str) => Welcome.fromJson(json.decode(str));
+CovidGerStates covidGerStatesFromJson(String str) => CovidGerStates.fromJson(json.decode(str));
 
-String welcomeToJson(Welcome data) => json.encode(data.toJson());
+String covidGerStatesToJson(CovidGerStates data) => json.encode(data.toJson());
 
-class Welcome {
-    Welcome({
+class CovidGerStates {
+    CovidGerStates({
         this.objectIdFieldName,
         this.uniqueIdField,
         this.globalIdFieldName,
@@ -27,7 +27,7 @@ class Welcome {
     List<Field> fields;
     List<Feature> features;
 
-    factory Welcome.fromJson(Map<String, dynamic> json) => Welcome(
+    factory CovidGerStates.fromJson(Map<String, dynamic> json) => CovidGerStates(
         objectIdFieldName: json["objectIdFieldName"],
         uniqueIdField: UniqueIdField.fromJson(json["uniqueIdField"]),
         globalIdFieldName: json["globalIdFieldName"],
@@ -68,19 +68,23 @@ class Attributes {
     Attributes({
         this.cases,
         this.deaths,
+        this.county,
     });
 
     int cases;
     int deaths;
+    String county;
 
     factory Attributes.fromJson(Map<String, dynamic> json) => Attributes(
         cases: json["cases"],
         deaths: json["deaths"],
+        county: json["county"],
     );
 
     Map<String, dynamic> toJson() => {
         "cases": cases,
         "deaths": deaths,
+        "county": county,
     };
 }
 
@@ -92,6 +96,7 @@ class Field {
         this.sqlType,
         this.domain,
         this.defaultValue,
+        this.length,
     });
 
     String name;
@@ -100,6 +105,7 @@ class Field {
     String sqlType;
     dynamic domain;
     dynamic defaultValue;
+    int length;
 
     factory Field.fromJson(Map<String, dynamic> json) => Field(
         name: json["name"],
@@ -108,6 +114,7 @@ class Field {
         sqlType: json["sqlType"],
         domain: json["domain"],
         defaultValue: json["defaultValue"],
+        length: json["length"] == null ? null : json["length"],
     );
 
     Map<String, dynamic> toJson() => {
@@ -117,6 +124,7 @@ class Field {
         "sqlType": sqlType,
         "domain": domain,
         "defaultValue": defaultValue,
+        "length": length == null ? null : length,
     };
 }
 
