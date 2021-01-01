@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:virometer/modules/countrys/germany/corona_request.dart';
 import 'package:http/http.dart' as http;
+import '../homescreen.dart';
 
 class SelectBox extends StatelessWidget {
   final String _virusTitle;
@@ -12,13 +13,13 @@ class SelectBox extends StatelessWidget {
 
   SelectBox(
       this._virusTitle, this._virusRegion, this._virusCases, this._virusDeaths);
-  
+
   @override
   Widget build(BuildContext context) {
-
     return Container(
         margin: EdgeInsets.only(left: 10, top: 10, right: 10, bottom: 10),
-        height: 155,
+        height: 195,
+        // height: 155, without nav button
         width: double.infinity,
         decoration: BoxDecoration(
             color: Colors.white,
@@ -95,6 +96,29 @@ class SelectBox extends StatelessWidget {
               alignment: Alignment.center,
               child: Text("Füge eine Region hinzu",
                   style: TextStyle(fontSize: 13, color: Color(0xff6E6E6E)))),
+          Column(children:[
+      
+            RaisedButton(
+              child: Text("geh zu 2"),
+              onPressed: () {
+                Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => SecondPage()));
+              },
+            ),
+        ]),new GestureDetector(
+  onTap: () {
+    Navigator.pushNamed(context, "");
+  },
+  child: new Text("my Title"),
+)
         ]));
   }
 }
+// child: RaisedButton(
+//   child: Text("geh zu 2"),
+//   onPressed: () {
+//     Navigator.of(context).push(
+//       MaterialPageRoute(builder: (context) => SecondPage())
+//     );
+//   },
+// ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:virometer/screens/viro_select/select.dart';
 import 'homescreen_appbar.dart';
 import 'select_box/select_box.dart';
 import 'package:dio/dio.dart';
@@ -7,12 +8,14 @@ import 'package:virometer/modules/countrys/germany/corona_request.dart';
 import 'package:virometer/modules/countrys/germany/services.dart';
 import 'dart:convert';
 
-class ViroApp extends StatefulWidget {
+
+
+class FirstPage extends StatefulWidget {
   @override
-  _ViroAppState createState() => _ViroAppState();
+  _FirstPageState createState() => _FirstPageState();
 }
 
-class _ViroAppState extends State<ViroApp> {
+class _FirstPageState extends State<FirstPage> {
   Future<CovidGerStates> getData() async {
     var client = http.Client();
     var covidGerModel = null;
@@ -42,27 +45,42 @@ class _ViroAppState extends State<ViroApp> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        theme: ThemeData(fontFamily: 'Montserrat'),
-        home: new Scaffold(
-             appBar: HomeAppBar.getAppBar(),
-            body: Container(
-              child: FutureBuilder<CovidGerStates>(
-                future: _covidGerStates,
-                builder: (context, snapshot) {
-                  if (snapshot.hasData) {
-                    return ListView.builder(
-                        itemCount: snapshot.data.features.length,
-                        itemBuilder: (context, index) {
-                          var covidAtrbs = snapshot.data.features[index];
-                          return SelectBox("Corona", covidAtrbs.attributes.county, covidAtrbs.attributes.cases.toString(), covidAtrbs.attributes.deaths.toString());
-                        });
-                  } else {
-                    return Center(child: CircularProgressIndicator());
-                  }
-                },
-              ),
-              // SelectBox("Corona", "Deutschland", "3", "33")
-            )));
+    return Scaffold(
+        appBar: HomeAppBar.getAppBar(),
+        body: Container(
+          child: FutureBuilder<CovidGerStates>(
+            future: _covidGerStates,
+            builder: (context, snapshot) {
+              if (snapshot.hasData) {
+                return ListView.builder(
+                    itemCount: snapshot.data.features.length,
+                    itemBuilder: (context, index) {
+                      var covidAtrbs = snapshot.data.features[index];
+                      return SelectBox(
+                          "Corona",
+                          covidAtrbs.attributes.county,
+                          covidAtrbs.attributes.cases.toString(),
+                          covidAtrbs.attributes.deaths.toString());
+                    });
+              } else {
+                return Center(child: CircularProgressIndicator());
+              }
+            },
+          ),
+          // SelectBox("Corona", "Deutschland", "3", "33")
+        ));
+  }
+}
+class SecondPage extends StatefulWidget {
+  @override
+  _SecondPageState createState() => _SecondPageState();
+}
+
+class _SecondPageState extends State<SecondPage> {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      
+    );
   }
 }
