@@ -79,8 +79,9 @@ class SecondPage extends StatefulWidget {
 class _SecondPageState extends State<SecondPage> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      
+    return Scaffold(
+       appBar: HomeAppBar.getAppBar(),
+       body: Container(child: Text("was gehrt av"),),
     );
   }
 }

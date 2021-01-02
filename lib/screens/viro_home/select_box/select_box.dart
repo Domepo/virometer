@@ -18,8 +18,8 @@ class SelectBox extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
         margin: EdgeInsets.only(left: 10, top: 10, right: 10, bottom: 10),
-        height: 195,
-        // height: 155, without nav button
+        // height: 255,
+         height: 155,
         width: double.infinity,
         decoration: BoxDecoration(
             color: Colors.white,
@@ -94,31 +94,14 @@ class SelectBox extends StatelessWidget {
           ),
           Align(
               alignment: Alignment.center,
-              child: Text("Füge eine Region hinzu",
-                  style: TextStyle(fontSize: 13, color: Color(0xff6E6E6E)))),
-          Column(children:[
-      
-            RaisedButton(
-              child: Text("geh zu 2"),
-              onPressed: () {
-                Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => SecondPage()));
-              },
-            ),
-        ]),new GestureDetector(
-  onTap: () {
-    Navigator.pushNamed(context, "");
-  },
-  child: new Text("my Title"),
-)
+              child: new GestureDetector(
+                onTap: () {
+                  Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) => SecondPage()));
+                },
+                child: new Text("Füge eine Region hinzu",
+                    style: TextStyle(fontSize: 13, color: Color(0xff6E6E6E))),
+              )),
         ]));
   }
 }
-// child: RaisedButton(
-//   child: Text("geh zu 2"),
-//   onPressed: () {
-//     Navigator.of(context).push(
-//       MaterialPageRoute(builder: (context) => SecondPage())
-//     );
-//   },
-// ),
