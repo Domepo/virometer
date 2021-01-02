@@ -1,8 +1,8 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:virometer/modules/countrys/germany/corona_request.dart';
 import 'package:http/http.dart' as http;
+import 'package:virometer/screens/viro_select/select_country.dart';
 import '../homescreen.dart';
 
 class SelectBox extends StatelessWidget {
@@ -13,7 +13,6 @@ class SelectBox extends StatelessWidget {
 
   SelectBox(
       this._virusTitle, this._virusRegion, this._virusCases, this._virusDeaths);
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -93,11 +92,15 @@ class SelectBox extends StatelessWidget {
             endIndent: 0,
           ),
           Align(
+            // 
+            // NAVIGATION
+            // 
+            // 
               alignment: Alignment.center,
               child: new GestureDetector(
                 onTap: () {
                   Navigator.of(context).push(
-                      MaterialPageRoute(builder: (context) => SecondPage()));
+                      MaterialPageRoute(builder: (context) => SelectCountryPage()));
                 },
                 child: new Text("Füge eine Region hinzu",
                     style: TextStyle(fontSize: 13, color: Color(0xff6E6E6E))),
