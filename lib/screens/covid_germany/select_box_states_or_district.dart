@@ -1,12 +1,9 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:virometer/screens/covid_germany/states_or_district.dart';
-import 'package:virometer/screens/viro_select/select_country.dart';
-import '../homescreen.dart';
-
-class SelectBoxCountries extends StatelessWidget {
-  final String _countryName;
-  SelectBoxCountries(this._countryName);
+import 'package:virometer/screens/covid_germany/districts.dart';
+import 'package:virometer/screens/covid_germany/states.dart';
+class SelectBoxStatesOrDistricts extends StatelessWidget {
+final String _subCountry;
+  SelectBoxStatesOrDistricts(this._subCountry);
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -29,17 +26,20 @@ class SelectBoxCountries extends StatelessWidget {
                   offset: Offset(0, 5))
             ]),
         child: Column(children: [
-          if (_countryName == "Germany")
-            StatesOrDisctrictOfACountry(
-                _countryName, SelectStateOrDistrictGERPage())
-        ]));
+          if (_subCountry == "Bundesland")
+            SelectStatesOrDistrictsWithDestination(
+                _subCountry, States()),
+          if (_subCountry == "Landkreis")
+            SelectStatesOrDistrictsWithDestination(
+                _subCountry, Districts())
+        ])
+        );
   }
 }
-
-class StatesOrDisctrictOfACountry extends StatelessWidget {
+class SelectStatesOrDistrictsWithDestination extends StatelessWidget {
   final String _countryName;
   final _pageDestination;
-  StatesOrDisctrictOfACountry(this._countryName, this._pageDestination);
+  SelectStatesOrDistrictsWithDestination(this._countryName, this._pageDestination);
   @override
   Widget build(BuildContext context) {
     return Align(
