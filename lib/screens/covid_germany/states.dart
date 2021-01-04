@@ -1,4 +1,5 @@
 import 'package:virometer/modules/countrys/germany/corona_state_class_api_fetch.dart';
+import 'package:virometer/screens/covid_germany/select_boxes/select_box_states.dart';
 import '../viro_home/homescreen_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -47,8 +48,7 @@ class _StatesState extends State<States> {
                     itemCount: snapshot.data.features.length,
                     itemBuilder: (context, index) {
                       var covidAtrbs = snapshot.data.features[index];
-                      return Container(
-                          child: Text(covidAtrbs.attributes.lanEwGen.toString()),);
+                      return SelectBoxStates(covidAtrbs.attributes.lanEwGen.toString());
                     });
               } else {
                 return Center(child: CircularProgressIndicator());
