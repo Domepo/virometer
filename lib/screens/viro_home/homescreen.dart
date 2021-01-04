@@ -4,8 +4,8 @@ import 'package:virometer/screens/viro_select/select_country.dart';
 import 'homescreen_appbar.dart';
 import 'select_box/select_box.dart';
 import 'package:virometer/modules/countrys/germany/corona_district_class_api_fetch.dart';
-import 'package:virometer/modules/countrys/germany/services.dart';
 import 'dart:convert';
+import 'dart:async';
 
 class FirstPage extends StatefulWidget {
   @override
@@ -68,4 +68,3 @@ class _FirstPageState extends State<FirstPage> {
         ));
   }
 }
-

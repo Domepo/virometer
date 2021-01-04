@@ -4,13 +4,15 @@ import '../viro_home/homescreen_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'package:hive/hive.dart';
+
 class States extends StatefulWidget {
   @override
   _StatesState createState() => _StatesState();
 }
 
 class _StatesState extends State<States> {
-    Future<CovidStateGermany> getData() async {
+  Future<CovidStateGermany> getData() async {
     var client = http.Client();
     var covidStateGerModel = null;
 
@@ -29,14 +31,23 @@ class _StatesState extends State<States> {
     return covidStateGerModel;
     //    print(userMap["features"][0]["attributes"]["deaths"]);
   }
+
   Future<CovidStateGermany> _covidStateGerStates;
   @override
   void initState() {
     _covidStateGerStates = getData();
     super.initState();
   }
+
+  void a() async {
+    var box = await Hive.openBox('testBox');
+    box.put('name', 'David');
+    print('Name: ${box.get('name')}');
+  }
+
   @override
   Widget build(BuildContext context) {
+    a();
     return Scaffold(
         appBar: HomeAppBar.getAppBar(),
         body: Container(
@@ -48,14 +59,14 @@ class _StatesState extends State<States> {
                     itemCount: snapshot.data.features.length,
                     itemBuilder: (context, index) {
                       var covidAtrbs = snapshot.data.features[index];
-                      return SelectBoxStates(covidAtrbs.attributes.lanEwGen.toString());
+                      return SelectBoxStates(
+                          covidAtrbs.attributes.lanEwGen.toString(),index);
                     });
               } else {
                 return Center(child: CircularProgressIndicator());
               }
             },
           ),
-          // SelectBox("Corona", "Deutschland", "3", "33")
         ));
   }
 }
