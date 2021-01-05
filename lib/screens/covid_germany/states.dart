@@ -1,3 +1,4 @@
+import 'package:latinize/latinize.dart';
 import 'package:virometer/modules/countrys/germany/corona_state_class_api_fetch.dart';
 import 'package:virometer/screens/covid_germany/select_boxes/select_box_states.dart';
 import '../viro_home/homescreen_appbar.dart';
@@ -39,15 +40,14 @@ class _StatesState extends State<States> {
     super.initState();
   }
 
-  void a() async {
-    var box = await Hive.openBox('testBox');
-    box.put('name', 'David');
-    print('Name: ${box.get('name')}');
-  }
+  // void a() async {
+  //   var box = await Hive.openBox('testBox');
+  //   box.put('name', 'David');
+  //   print('Name: ${box.get('name')}');
+  // }
 
   @override
   Widget build(BuildContext context) {
-    a();
     return Scaffold(
         appBar: HomeAppBar.getAppBar(),
         body: Container(
@@ -60,7 +60,13 @@ class _StatesState extends State<States> {
                     itemBuilder: (context, index) {
                       var covidAtrbs = snapshot.data.features[index];
                       return SelectBoxStates(
-                          covidAtrbs.attributes.lanEwGen.toString(),index);
+                        // 
+                        // 
+                        // latininize = remove germany umlauts
+                        // Ä = AE
+                        // 
+                        // 
+                         latinize(covidAtrbs.attributes.lanEwGen.toString()) );
                     });
               } else {
                 return Center(child: CircularProgressIndicator());

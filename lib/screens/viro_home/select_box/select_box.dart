@@ -15,6 +15,7 @@ class SelectBox extends StatelessWidget {
       this._virusTitle, this._virusRegion, this._virusCases, this._virusDeaths);
   @override
   Widget build(BuildContext context) {
+
     return Container(
         margin: EdgeInsets.only(left: 10, top: 10, right: 10, bottom: 10),
         // height: 255,

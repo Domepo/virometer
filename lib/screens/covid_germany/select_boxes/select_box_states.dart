@@ -1,18 +1,35 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:latinize/latinize.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SelectBoxStates extends StatefulWidget {
   final String _stateName;
-  final int _index;
-  SelectBoxStates(this._stateName,this._index);
+  SelectBoxStates(this._stateName);
 
   @override
   _SelectBoxStatesState createState() => _SelectBoxStatesState();
 }
 
 class _SelectBoxStatesState extends State<SelectBoxStates> {
+
+
+addStringToSF(a) async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  prefs.setString('stringValue', a);
+}
+
+
   bool _isChecked = false;
+  Box box;
+  void initState(){
+    super.initState();
+    box = Hive.box("states_checked");
+  }
+@override
   Widget build(BuildContext context) {
+    
     return Container(
         margin: EdgeInsets.only(left: 10, top: 10, right: 10, bottom: 0),
         height: 75,
@@ -32,6 +49,8 @@ class _SelectBoxStatesState extends State<SelectBoxStates> {
                   blurRadius: 5,
                   offset: Offset(0, 5))
             ]),
+
+
         //
         // Checkboxes
         //
@@ -40,25 +59,33 @@ class _SelectBoxStatesState extends State<SelectBoxStates> {
               title: Text(widget._stateName,
                   style: TextStyle(fontSize: 25, color: Color(0xff6E6E6E))),
               controlAffinity: ListTileControlAffinity.platform,
-              value: _isChecked,
+              value: box.get(widget._stateName),
               onChanged: (bool newvalue) {
                 setState(() {
-                  _isChecked = newvalue;
-                  Test(widget._stateName, _isChecked).pushData();
+                  box.put(widget._stateName, newvalue);
                 });
               }),
         ));
-  }
+    
+
+    
+    // Hive.openBox('states_checked');
+    // var box = Hive.box("states_checked");
+
+    // //   @HiveType(typeId: 0)
+    // if (box.get(widget._stateName) == null) {
+    //   box.put(widget._stateName, _isChecked);
+    
+     }
 }
 
 class Test {
   final String _state;
   final bool _isCheckedBool;
   Test(this._state, this._isCheckedBool);
-  Future<List> pushData() async {
+  void pushData() async {
     var box = await Hive.openBox('states_checked');
     box.put(this._state, this._isCheckedBool);
-    print(_state+" ${box.get(_state)}");
-    return [_state,box.get(_state)];
+    print(_state + " ${box.get(_state)}");
   }
 }
