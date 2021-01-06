@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:latinize/latinize.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:virometer/states_checked_hivedb.dart';
 
 class SelectBoxStates extends StatefulWidget {
   final String _stateName;
@@ -14,13 +14,6 @@ class SelectBoxStates extends StatefulWidget {
 
 class _SelectBoxStatesState extends State<SelectBoxStates> {
 
-
-addStringToSF(a) async {
-  SharedPreferences prefs = await SharedPreferences.getInstance();
-  prefs.setString('stringValue', a);
-}
-
-
   bool _isChecked = false;
   Box box;
   void initState(){
@@ -29,7 +22,6 @@ addStringToSF(a) async {
   }
 @override
   Widget build(BuildContext context) {
-    
     return Container(
         margin: EdgeInsets.only(left: 10, top: 10, right: 10, bottom: 0),
         height: 75,
@@ -59,10 +51,10 @@ addStringToSF(a) async {
               title: Text(widget._stateName,
                   style: TextStyle(fontSize: 25, color: Color(0xff6E6E6E))),
               controlAffinity: ListTileControlAffinity.platform,
-              value: box.get(widget._stateName),
+              value:  box.get(widget._stateName),
               onChanged: (bool newvalue) {
                 setState(() {
-                  box.put(widget._stateName, newvalue);
+                  box.put(widget._stateName,newvalue);
                 });
               }),
         ));

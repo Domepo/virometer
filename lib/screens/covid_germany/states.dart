@@ -59,6 +59,7 @@ class _StatesState extends State<States> {
                     itemCount: snapshot.data.features.length,
                     itemBuilder: (context, index) {
                       var covidAtrbs = snapshot.data.features[index];
+                      // print(latinize(covidAtrbs.attributes.lanEwGen.toString()) );
                       return SelectBoxStates(
                         // 
                         // 
@@ -67,6 +68,7 @@ class _StatesState extends State<States> {
                         // 
                         // 
                          latinize(covidAtrbs.attributes.lanEwGen.toString()) );
+                        
                     });
               } else {
                 return Center(child: CircularProgressIndicator());
