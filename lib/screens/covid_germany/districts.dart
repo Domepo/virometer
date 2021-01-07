@@ -8,12 +8,18 @@ import 'package:virometer/screens/covid_germany/select_boxes/select_box_district
 import 'package:hive/hive.dart';
 
 class Districts extends StatefulWidget {
+  Districts({Key key}) : super(key: key);
   @override
   _DistrictsState createState() => _DistrictsState();
 }
 
 class _DistrictsState extends State<Districts> {
-    Box box;
+  Box box;
+  
+  var duplicateItems = List<String>();
+  
+  var items = List<String>();
+  
 
   TextEditingController editingController = TextEditingController();
 
@@ -27,7 +33,10 @@ class _DistrictsState extends State<Districts> {
       if (response.statusCode == 200) {
         var responseBody = response.body;
         var repsonseBodyMap = json.decode(responseBody);
+
         covidDistrictGerModel = CovidGerDistricts.fromJson(repsonseBodyMap);
+
+        print(covidDistrictGerModel["features"]);
         return covidDistrictGerModel;
       }
     } catch (Exception) {
@@ -36,17 +45,44 @@ class _DistrictsState extends State<Districts> {
     return covidDistrictGerModel;
     //    print(userMap["features"][0]["attributes"]["deaths"]);
   }
-
   Future<CovidGerDistricts> _covidDistrictGerModel;
+
   @override
   void initState() {
     _covidDistrictGerModel = getData();
     box = Hive.box("district_checked");
+    duplicateItems =box.keys.cast<String>().toList();
+
     super.initState();
+  }
+
+  void filterSearchResults(String query) {
+    List<String> dummySearchList = List<String>();
+    dummySearchList.addAll(duplicateItems);
+    if(query.isNotEmpty) {
+      List<String> dummyListData = List<String>();
+      dummySearchList.forEach((item) {
+        if(item.contains(query)) {
+          dummyListData.add(item);
+        }
+      });
+      setState(() {
+        items.clear();
+        items.addAll(dummyListData);
+      });
+      return;
+    } else {
+      setState(() {
+        items.clear();
+        items.addAll(duplicateItems);
+      });
+    }
+
   }
 
   @override
   Widget build(BuildContext context) {
+  var a = box.keys.toList();
     return Scaffold(
         appBar: HomeAppBar.getAppBar(),
         body: Container(
@@ -54,7 +90,9 @@ class _DistrictsState extends State<Districts> {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: TextField(
-              onChanged: (value) {},
+             onChanged: (value) {
+                  filterSearchResults(value);
+                },
               controller: editingController,
               decoration: InputDecoration(
                   labelText: "Search",
@@ -73,9 +111,13 @@ class _DistrictsState extends State<Districts> {
                       itemCount: snapshot.data.features.length,
                       itemBuilder: (context, index) {
                         var covidAtrbs = snapshot.data.features[index];
+                        items.add(covidAtrbs.attributes.county);
                         // print(latinize(covidAtrbs.attributes.lanEwGen.toString()) );
+      //  return ListTile(
+      //               title: Text('${items[index]}'),
+      //             );
                         return SelectBoxDistrcts(
-                            latinize(covidAtrbs.attributes.county.toString()));
+                            latinize(items[index].toString()));
                       });
                 } else {
                   return Center(child: CircularProgressIndicator());

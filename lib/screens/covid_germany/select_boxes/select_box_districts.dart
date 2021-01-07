@@ -56,8 +56,9 @@ class _SelectBoxDistrctsState extends State<SelectBoxDistrcts> {
           controlAffinity: ListTileControlAffinity.platform,
           value: box.get(widget._districtName),
           onChanged: (bool newvalue) {
-            setState(() {
+            setState(() { 
               box.put(widget._districtName, newvalue);
+              box.put("allDistricts", box.keys.toString());
             });
           }),
     );
