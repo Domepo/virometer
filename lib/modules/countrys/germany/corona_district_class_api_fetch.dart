@@ -4,12 +4,12 @@
 
 import 'dart:convert';
 
-CovidGerStates covidGerStatesFromJson(String str) => CovidGerStates.fromJson(json.decode(str));
+CovidGerDistricts covidGerStatesFromJson(String str) => CovidGerDistricts.fromJson(json.decode(str));
 
-String covidGerStatesToJson(CovidGerStates data) => json.encode(data.toJson());
+String covidGerStatesToJson(CovidGerDistricts data) => json.encode(data.toJson());
 
-class CovidGerStates {
-    CovidGerStates({
+class CovidGerDistricts {
+    CovidGerDistricts({
         this.objectIdFieldName,
         this.uniqueIdField,
         this.globalIdFieldName,
@@ -27,7 +27,7 @@ class CovidGerStates {
     List<Field> fields;
     List<Feature> features;
 
-    factory CovidGerStates.fromJson(Map<String, dynamic> json) => CovidGerStates(
+    factory CovidGerDistricts.fromJson(Map<String, dynamic> json) => CovidGerDistricts(
         objectIdFieldName: json["objectIdFieldName"],
         uniqueIdField: UniqueIdField.fromJson(json["uniqueIdField"]),
         globalIdFieldName: json["globalIdFieldName"],

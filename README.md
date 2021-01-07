@@ -43,3 +43,47 @@ First of all register the Object to the main.dart file
  ```bash
  flutter packages pub run build_runner build
  ```
+# Hive test
+   ```dart
+     print("Schleswig-Holstein "+box.get("Schleswig-Holstein").toString());
+     print("Hamburg "+box.get("Hamburg").toString());
+     print("Niedersachsen "+box.get("Niedersachsen").toString());
+     print("Bremen "+box.get("Bremen").toString());
+     print("Nordrhein-Westfalen "+box.get("Nordrhein-Westfalen").toString());
+     print("Hessen "+box.get("Hessen").toString());
+     print("Rheinland-Pfalz "+box.get("Rheinland-Pfalz").toString());
+     print("Baden-Wuerttemberg "+box.get("Baden-Wurttemberg").toString());
+     print("Bayern "+box.get("Bayern").toString());
+     print("Saarland "+box.get("Saarland").toString());
+     print("Brandenburg "+box.get("Brandenburg").toString());
+     print("Mecklenburg-Vorpommern "+box.get("Mecklenburg-Vorpommern").toString());
+     print("Sachsen "+box.get("Sachsen").toString());
+     print("Sachsen-Anhalt "+box.get("Sachsen-Anhalt").toString());
+     print("Thüringen "+box.get("Thuringen").toString());
+ ```
+# Structure for later operations
+```Dart
+Scaffold(body: ListView(children: [
+  Container(
+   //box margin height etc
+   child: Column(
+     children:[
+       Align(
+          // title
+       ),
+       Expanded(
+         child: FutureBuilder...
+       ),
+       Divider(
+
+       ),
+       Align(
+
+       ),
+       Container(
+         //repeat Container 1
+       )
+     ]
+   )
+)]))
+```

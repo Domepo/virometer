@@ -4,21 +4,21 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:latinize/latinize.dart';
 import 'package:virometer/states_checked_hivedb.dart';
 
-class SelectBoxStates extends StatefulWidget {
-  final String _stateName;
-  SelectBoxStates(this._stateName);
+class SelectBoxDistrcts extends StatefulWidget {
+  final String _districtName;
+  SelectBoxDistrcts(this._districtName);
 
   @override
-  _SelectBoxStatesState createState() => _SelectBoxStatesState();
+  _SelectBoxDistrctsState createState() => _SelectBoxDistrctsState();
 }
 
-class _SelectBoxStatesState extends State<SelectBoxStates> {
+class _SelectBoxDistrctsState extends State<SelectBoxDistrcts> {
 
   bool _isChecked = false;
   Box box;
   void initState(){
     super.initState();
-    box = Hive.box("states_checked");
+    box = Hive.box("district_checked");
   }
 @override
   Widget build(BuildContext context) {
@@ -48,13 +48,13 @@ class _SelectBoxStatesState extends State<SelectBoxStates> {
         //
         child: Center(
           child: CheckboxListTile(
-              title: Text(widget._stateName,
+              title: Text(widget._districtName,
                   style: TextStyle(fontSize: 25, color: Color(0xff6E6E6E))),
               controlAffinity: ListTileControlAffinity.platform,
-              value:  box.get(widget._stateName),
+              value:  box.get(widget._districtName),
               onChanged: (bool newvalue) {
                 setState(() {
-                  box.put(widget._stateName,newvalue);
+                  box.put(widget._districtName,newvalue);
                 });
               }),
         ));

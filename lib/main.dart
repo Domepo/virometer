@@ -12,6 +12,7 @@ void main() async {
   // Hive.registerAdapter(StatesCheckAdapter());
   Hive.init(document.path);
   await Hive.openBox("states_checked");
+   await Hive.openBox("district_checked");
   runApp(ViroApp());
 
 }
