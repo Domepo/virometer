@@ -45,7 +45,7 @@ class StatesOrDisctrictOfACountry extends StatelessWidget {
     return Align(
       alignment: Alignment.center,
       child: new GestureDetector(
-        onTap: () {
+        onTap: () { 
           Navigator.of(context)
               .push(MaterialPageRoute(builder: (context) => _pageDestination));
         },

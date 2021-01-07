@@ -18,17 +18,14 @@ class FirstPage extends StatefulWidget {
 class _FirstPageState extends State<FirstPage> {
   @override
   Box box;
-List filter = [];
-
+  List filter = [];
 
   void initState() {
-     _covidStateGerStates = getData();
+    _covidStateGerStates = getData();
     Hive.openBox("states_checked");
     box = Hive.box("states_checked");
     super.initState();
   }
-
-
 
   Future<CovidStateGermany> getData() async {
     var client = http.Client();
@@ -55,6 +52,7 @@ List filter = [];
 
   @override
   Widget build(BuildContext context) {
+
     // print("Schleswig-Holstein "+box.get("Schleswig-Holstein").toString());
     // print("Hamburg "+box.get("Hamburg").toString());
     // print("Niedersachsen "+box.get("Niedersachsen").toString());
@@ -79,22 +77,25 @@ List filter = [];
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 return ListView.builder(
-                    shrinkWrap: true,
                     itemCount: snapshot.data.features.length,
                     itemBuilder: (context, index) {
-                      var covidAtrbs = snapshot.data.features[index];
-                      // print(covidAtrbs.attributes.lanEwGen.toString());
-                      // print(covidAtrbs.attributes.lanEwGen);
-                      // if (box.get(covidAtrbs.attributes.lanEwGen) == true) {
-                      // print(covidAtrbs.attributes.lanEwGen +
-                      // "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaahhh");
 
-                      //}
-                      return SelectBox(
-                          "Corona",
-                          covidAtrbs.attributes.lanEwGen.toString(),
-                          covidAtrbs.attributes.fallzahl.toString(),
-                          covidAtrbs.attributes.death.toString());
+
+                      var covidAtrbs = snapshot.data.features[index];
+
+                      print(covidAtrbs.attributes.lanEwGen);
+                      if (box.get(covidAtrbs.attributes.lanEwGen) == true) {
+                        return SelectBox(
+                            "Corona",
+                            covidAtrbs.attributes.lanEwGen.toString(),
+                            covidAtrbs.attributes.fallzahl.toString(),
+                            covidAtrbs.attributes.death.toString());
+                            
+                        // return  Column(children: [Text("false "+covidAtrbs.attributes.lanEwGen)]);
+                      } else {
+                        // return  Column(children: [Text("true "+covidAtrbs.attributes.lanEwGen)]);
+                        return Column();
+                      }
                     });
               } else {
                 return Center(child: CircularProgressIndicator());

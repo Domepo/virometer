@@ -1,9 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:virometer/modules/countrys/germany/corona_district_class_api_fetch.dart';
-import 'package:http/http.dart' as http;
 import 'package:virometer/screens/viro_select/select_country.dart';
-import '../homescreen.dart';
 
 class SelectBox extends StatelessWidget {
   final String _virusTitle;
