@@ -5,19 +5,24 @@ import 'package:virometer/modules/countrys/germany/corona_district_class_api_fet
 import 'dart:convert';
 import 'package:latinize/latinize.dart';
 import 'package:virometer/screens/covid_germany/select_boxes/select_box_districts.dart';
+import 'package:hive/hive.dart';
 
 class Districts extends StatefulWidget {
   @override
-  _StatesState createState() => _StatesState();
+  _DistrictsState createState() => _DistrictsState();
 }
 
-class _StatesState extends State<Districts> {
+class _DistrictsState extends State<Districts> {
+    Box box;
+
+  TextEditingController editingController = TextEditingController();
+
   Future<CovidGerDistricts> getData() async {
     var client = http.Client();
     var covidDistrictGerModel = null;
 
     var response = await client.get(
-        "https://services7.arcgis.com/mOBPykOjAyBO2ZKk/arcgis/rest/services/RKI_Landkreisdaten/FeatureServer/0/query?where=1%3D1&outFields=cases,deaths,county&returnGeometry=false&outSR=4326&f=json");
+        "https://services7.arcgis.com/mOBPykOjAyBO2ZKk/arcgis/rest/services/RKI_Landkreisdaten/FeatureServer/0/query?where=1%3D1&outFields=*&returnGeometry=false&outSR=4326&f=json");
     try {
       if (response.statusCode == 200) {
         var responseBody = response.body;
@@ -36,14 +41,30 @@ class _StatesState extends State<Districts> {
   @override
   void initState() {
     _covidDistrictGerModel = getData();
+    box = Hive.box("district_checked");
     super.initState();
   }
 
   @override
-    Widget build(BuildContext context) {
-      return Scaffold(
-          appBar: HomeAppBar.getAppBar(),
-          body: Container(
+  Widget build(BuildContext context) {
+    return Scaffold(
+        appBar: HomeAppBar.getAppBar(),
+        body: Container(
+            child: Column(children: <Widget>[
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: TextField(
+              onChanged: (value) {},
+              controller: editingController,
+              decoration: InputDecoration(
+                  labelText: "Search",
+                  hintText: "Search",
+                  prefixIcon: Icon(Icons.search),
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(10.0)))),
+            ),
+          ),
+          Expanded(
             child: FutureBuilder<CovidGerDistricts>(
               future: _covidDistrictGerModel,
               builder: (context, snapshot) {
@@ -61,7 +82,7 @@ class _StatesState extends State<Districts> {
                 }
               },
             ),
-          ));
-    }
+          )
+        ])));
   }
-
+}

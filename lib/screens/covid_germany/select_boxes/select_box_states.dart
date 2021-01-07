@@ -22,6 +22,9 @@ class _SelectBoxStatesState extends State<SelectBoxStates> {
   }
 @override
   Widget build(BuildContext context) {
+        if(box.get(widget._stateName)==null){
+      box.put(widget._stateName, false);
+    };
     return Container(
         margin: EdgeInsets.only(left: 10, top: 10, right: 10, bottom: 0),
         height: 75,

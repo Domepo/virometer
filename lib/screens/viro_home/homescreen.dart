@@ -23,23 +23,23 @@ class _FirstPageState extends State<FirstPage> {
 
   void initState() {
     _covidStateGerStates = getData();
-    Hive.openBox("states_checked");
-    box = Hive.box("states_checked");
+    Hive.openBox("district_checked");
+    box = Hive.box("district_checked");
     super.initState();
   }
 
-  Future<CovidStateGermany> getData() async {
+  Future<CovidGerDistricts> getData() async {
     var client = http.Client();
     var covidStateGerModel = null;
 
     var response = await client.get(
-        "https://services7.arcgis.com/mOBPykOjAyBO2ZKk/arcgis/rest/services/Coronaf%C3%A4lle_in_den_Bundesl%C3%A4ndern/FeatureServer/0/query?where=1%3D1&outFields=*&returnGeometry=false&outSR=4326&f=json");
+        "https://services7.arcgis.com/mOBPykOjAyBO2ZKk/arcgis/rest/services/RKI_Landkreisdaten/FeatureServer/0/query?where=1%3D1&outFields=*&returnGeometry=false&outSR=4326&f=json");
     try {
       if (response.statusCode == 200) {
         var responseBody = response.body;
         var repsonseBodyMap = json.decode(responseBody);
-        covidStateGerModel = CovidStateGermany.fromJson(repsonseBodyMap);
-        print(repsonseBodyMap);
+        covidStateGerModel = CovidGerDistricts.fromJson(repsonseBodyMap);
+        // print(repsonseBodyMap);
         return covidStateGerModel;
       }
     } catch (Exception) {
@@ -48,16 +48,16 @@ class _FirstPageState extends State<FirstPage> {
     return covidStateGerModel;
     //  print(userMap["features"][0]["attributes"]["deaths"]);
   }
-
-  Future<CovidStateGermany> _covidStateGerStates;
+  Future<CovidGerDistricts> _covidStateGerStates;
 
   @override
   Widget build(BuildContext context) {
+    var inzidenzColor;
     return Scaffold(
         appBar: HomeAppBar.getAppBar(),
         body: Stack(
           children: <Widget>[
-            FutureBuilder<CovidStateGermany>(
+            FutureBuilder<CovidGerDistricts>(
               future: _covidStateGerStates,
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
@@ -67,18 +67,20 @@ class _FirstPageState extends State<FirstPage> {
                         var covidAtrbs = snapshot.data.features[index];
 
                         var covidAtrbsIndex = covidAtrbs.attributes;
-                        if (box.get(covidAtrbsIndex.lanEwGen) == true) {
-                          // für morgen
-                          //
-                          // i = i+1;
+                        if (box.get(latinize(covidAtrbsIndex.county)) == true) {
+
                           var _virusTitle =
-                              covidAtrbs.attributes.lanEwGen.toString();
+                              covidAtrbs.attributes.county.toString();
                           var _virusRegion =
-                              covidAtrbs.attributes.death.toString();
+                              covidAtrbs.attributes.cases7Per100KTxt.toString();
                           var _virusCases =
-                              covidAtrbs.attributes.death7Bl.toString();
+                              covidAtrbs.attributes.cases.toString();
                           var _virusDeaths =
-                              covidAtrbs.attributes.death.toString();
+                              covidAtrbs.attributes.deaths.toString();
+                              
+                          if(covidAtrbs.attributes.cases7Per100K > 200){
+                           inzidenzColor = 0xfff52020;
+                          }     else{inzidenzColor =0xff2e9c27;}                        
                           return Container(
                               margin: EdgeInsets.only(
                                   left: 10, top: 10, right: 10, bottom: 10),
@@ -121,11 +123,12 @@ class _FirstPageState extends State<FirstPage> {
                                     alignment: Alignment.center,
                                     child: Text(_virusRegion,
                                         style: TextStyle(
-                                            fontSize: 13,
-                                            color: Color(0xff6E6E6E)))),
+                                            fontSize: 14,
+                                            color: Color(inzidenzColor)))),
                                 Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceAround,
+                                      mainAxisSize: MainAxisSize.max,
                                   children: [
                                     Text(_virusCases,
                                         style: TextStyle(
@@ -142,6 +145,8 @@ class _FirstPageState extends State<FirstPage> {
                                 Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceAround,
+
+                                      mainAxisSize: MainAxisSize.max,
                                   children: [
                                     Text("Fälle",
                                         style: TextStyle(
