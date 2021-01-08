@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
-import 'package:hive_flutter/hive_flutter.dart';
-import 'package:latinize/latinize.dart';
-import 'package:virometer/states_checked_hivedb.dart';
-
 class SelectBoxDistrcts extends StatefulWidget {
   final String _districtName;
   SelectBoxDistrcts(this._districtName);
@@ -13,7 +9,6 @@ class SelectBoxDistrcts extends StatefulWidget {
 }
 
 class _SelectBoxDistrctsState extends State<SelectBoxDistrcts> {
-  bool _isChecked = false;
   Box box;
   
   void initState() {
@@ -25,7 +20,7 @@ class _SelectBoxDistrctsState extends State<SelectBoxDistrcts> {
   Widget build(BuildContext context) {
     if(box.get(widget._districtName)==null){
       box.put(widget._districtName, false);
-    };
+    }
     return Container(
       margin: EdgeInsets.only(left: 10, top: 10, right: 10, bottom: 0),
       height: 75,
@@ -61,11 +56,6 @@ class _SelectBoxDistrctsState extends State<SelectBoxDistrcts> {
             });
           }),
     );
-
-    // Hive.openBox('states_checked');
-    // var box = Hive.box("states_checked");
-
-    // //   @HiveType(typeId: 0)
   }
 }
 

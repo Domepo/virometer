@@ -24,7 +24,7 @@ class _DistrictsState extends State<Districts> {
 
   Future<CovidGerDistricts> getData() async {
     var client = http.Client();
-    var covidDistrictGerModel = null;
+    var covidDistrictGerModel;
 
     var response = await client.get(
         "https://services7.arcgis.com/mOBPykOjAyBO2ZKk/arcgis/rest/services/RKI_Landkreisdaten/FeatureServer/0/query?where=1%3D1&outFields=*&returnGeometry=false&outSR=4326&f=json");
@@ -97,7 +97,7 @@ class _DistrictsState extends State<Districts> {
               controller: editingController,
               decoration: InputDecoration(
                   labelText: "Suche",
-                  hintText: "bitte auf Umlaute achten",
+                  hintText: "auf Umlaute und Großbuchstaben achten",
                   prefixIcon: Icon(Icons.search),
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(10.0)))),
@@ -112,13 +112,17 @@ class _DistrictsState extends State<Districts> {
                       itemCount: snapshot.data.features.length,
                       itemBuilder: (context, index) {
                         var covidAtrbs = snapshot.data.features[index];
-                        items.add(covidAtrbs.attributes.county);
-                        // print(latinize(covidAtrbs.attributes.lanEwGen.toString()) );
-                        //  return ListTile(
-                        //               title: Text('${items[index]}'),
-                        //             );
+                        items.add(covidAtrbs.attributes.county.toString());
+                      //  
+                      // 
+                      // 
+                      // ISSUE 
+                      // after a certain time an error is thrown during the search. 
+                      // RangeError (index): Invalid value: Not in inclusive range 0..73: 125
+                      // 
+                      // 
                         return SelectBoxDistrcts(
-                            latinize(items[index].toString()));
+                            latinize(items[index]));
                       });
                 } else {
                   return Center(child: CircularProgressIndicator());

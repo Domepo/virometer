@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:virometer/screens/covid_germany/select_boxes/select_box_states_or_district.dart';
 import '../viro_home/homescreen_appbar.dart';
-import 'package:virometer/screens/viro_home/select_box/select_box_countries.dart';
 
 class SelectStateOrDistrictGERPage extends StatefulWidget {
   @override

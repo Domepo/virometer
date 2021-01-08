@@ -5,7 +5,6 @@ import '../viro_home/homescreen_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'package:hive/hive.dart';
 
 class States extends StatefulWidget {
   @override
@@ -15,7 +14,7 @@ class States extends StatefulWidget {
 class _StatesState extends State<States> {
   Future<CovidStateGermany> getData() async {
     var client = http.Client();
-    var covidStateGerModel = null;
+    var covidStateGerModel;
 
     var response = await client.get(
         "https://services7.arcgis.com/mOBPykOjAyBO2ZKk/arcgis/rest/services/Coronaf%C3%A4lle_in_den_Bundesl%C3%A4ndern/FeatureServer/0/query?where=1%3D1&outFields=*&returnGeometry=false&outSR=4326&f=json");
