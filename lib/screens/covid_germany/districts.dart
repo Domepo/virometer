@@ -15,11 +15,10 @@ class Districts extends StatefulWidget {
 
 class _DistrictsState extends State<Districts> {
   Box box;
-  
+
   var duplicateItems = List<String>();
-  
+
   var items = List<String>();
-  
 
   TextEditingController editingController = TextEditingController();
 
@@ -45,30 +44,34 @@ class _DistrictsState extends State<Districts> {
     return covidDistrictGerModel;
     //    print(userMap["features"][0]["attributes"]["deaths"]);
   }
+
   Future<CovidGerDistricts> _covidDistrictGerModel;
 
   @override
   void initState() {
     _covidDistrictGerModel = getData();
     box = Hive.box("district_checked");
-    duplicateItems =box.keys.cast<String>().toList();
+    //
+    // https://stackoverflow.com/questions/49109225/convert-listdynamic-to-liststring
+    //
+    duplicateItems = box.keys.cast<String>().toList();
 
     super.initState();
   }
 
   void filterSearchResults(String query) {
-    List<String> dummySearchList = List<String>();
-    dummySearchList.addAll(duplicateItems);
-    if(query.isNotEmpty) {
-      List<String> dummyListData = List<String>();
-      dummySearchList.forEach((item) {
-        if(item.contains(query)) {
-          dummyListData.add(item);
+    List<String> searchList = List<String>();
+    searchList.addAll(duplicateItems);
+    if (query.isNotEmpty) {
+      List<String> listData = List<String>();
+      searchList.forEach((item) {
+        if (item.contains(query)) {
+          listData.add(item);
         }
       });
       setState(() {
         items.clear();
-        items.addAll(dummyListData);
+        items.addAll(listData);
       });
       return;
     } else {
@@ -77,12 +80,10 @@ class _DistrictsState extends State<Districts> {
         items.addAll(duplicateItems);
       });
     }
-
   }
 
   @override
   Widget build(BuildContext context) {
-  var a = box.keys.toList();
     return Scaffold(
         appBar: HomeAppBar.getAppBar(),
         body: Container(
@@ -90,13 +91,13 @@ class _DistrictsState extends State<Districts> {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: TextField(
-             onChanged: (value) {
-                  filterSearchResults(value);
-                },
+              onChanged: (value) {
+                filterSearchResults(value);
+              },
               controller: editingController,
               decoration: InputDecoration(
-                  labelText: "Search",
-                  hintText: "Search",
+                  labelText: "Suche",
+                  hintText: "bitte auf Umlaute achten",
                   prefixIcon: Icon(Icons.search),
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(10.0)))),
@@ -113,9 +114,9 @@ class _DistrictsState extends State<Districts> {
                         var covidAtrbs = snapshot.data.features[index];
                         items.add(covidAtrbs.attributes.county);
                         // print(latinize(covidAtrbs.attributes.lanEwGen.toString()) );
-      //  return ListTile(
-      //               title: Text('${items[index]}'),
-      //             );
+                        //  return ListTile(
+                        //               title: Text('${items[index]}'),
+                        //             );
                         return SelectBoxDistrcts(
                             latinize(items[index].toString()));
                       });

@@ -58,7 +58,6 @@ class _SelectBoxDistrctsState extends State<SelectBoxDistrcts> {
           onChanged: (bool newvalue) {
             setState(() { 
               box.put(widget._districtName, newvalue);
-              box.put("allDistricts", box.keys.toString());
             });
           }),
     );
@@ -70,13 +69,3 @@ class _SelectBoxDistrctsState extends State<SelectBoxDistrcts> {
   }
 }
 
-class Test {
-  final String _state;
-  final bool _isCheckedBool;
-  Test(this._state, this._isCheckedBool);
-  void pushData() async {
-    var box = await Hive.openBox('states_checked');
-    box.put(this._state, this._isCheckedBool);
-    print(_state + " ${box.get(_state)}");
-  }
-}

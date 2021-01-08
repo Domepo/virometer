@@ -3,6 +3,7 @@ import 'package:http/http.dart' as http;
 import 'package:latinize/latinize.dart';
 import 'package:virometer/modules/countrys/germany/corona_district_class_api_fetch.dart';
 import 'package:virometer/modules/countrys/germany/corona_state_class_api_fetch.dart';
+import 'package:virometer/screens/covid_germany/districts.dart';
 import 'homescreen_appbar.dart';
 import 'select_box/select_box.dart';
 import 'package:hive/hive.dart';
@@ -52,6 +53,7 @@ class _FirstPageState extends State<FirstPage> {
 
   @override
   Widget build(BuildContext context) {
+    print(box.keys);
     var inzidenzColor;
     return Scaffold(
         appBar: HomeAppBar.getAppBar(),
@@ -177,7 +179,7 @@ class _FirstPageState extends State<FirstPage> {
                 onPressed: () {
                   Navigator.of(context)
                       .push(MaterialPageRoute(
-                          builder: (context) => SelectCountryPage()))
+                          builder: (context) => Districts()))
                       .then((value) => setState(() {}));
                   ;
                 },
