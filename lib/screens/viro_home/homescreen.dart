@@ -7,7 +7,7 @@ import 'homescreen_appbar.dart';
 import 'package:hive/hive.dart';
 import 'dart:convert';
 import 'dart:async';
-
+import 'package:introduction_screen/introduction_screen.dart';
 
 class FirstPage extends StatefulWidget {
   @override
@@ -15,6 +15,7 @@ class FirstPage extends StatefulWidget {
 }
 
 class _FirstPageState extends State<FirstPage> {
+
   @override
   Box box;
   List filter = [];
@@ -46,6 +47,7 @@ class _FirstPageState extends State<FirstPage> {
     return covidStateGerModel;
     //  print(userMap["features"][0]["attributes"]["deaths"]);
   }
+
   Future<CovidGerDistricts> _covidStateGerStates;
 
   @override
@@ -54,8 +56,9 @@ class _FirstPageState extends State<FirstPage> {
     var inzidenzColor;
     return Scaffold(
         appBar: HomeAppBar.getAppBar(),
+
         body: Stack(
-          children: <Widget>[
+          children: <Widget>[ 
             FutureBuilder<CovidGerDistricts>(
               future: _covidStateGerStates,
               builder: (context, snapshot) {
@@ -67,7 +70,6 @@ class _FirstPageState extends State<FirstPage> {
 
                         var covidAtrbsIndex = covidAtrbs.attributes;
                         if (box.get(latinize(covidAtrbsIndex.county)) == true) {
-
                           var _virusTitle =
                               covidAtrbs.attributes.county.toString();
                           var _virusRegion =
@@ -76,10 +78,12 @@ class _FirstPageState extends State<FirstPage> {
                               covidAtrbs.attributes.cases.toString();
                           var _virusDeaths =
                               covidAtrbs.attributes.deaths.toString();
-                              
-                          if(covidAtrbs.attributes.cases7Per100K > 200){
-                           inzidenzColor = 0xfff52020;
-                          }     else{inzidenzColor =0xff2e9c27;}                        
+
+                          if (covidAtrbs.attributes.cases7Per100K > 200) {
+                            inzidenzColor = 0xfff52020;
+                          } else {
+                            inzidenzColor = 0xff2e9c27;
+                          }
                           return Container(
                               margin: EdgeInsets.only(
                                   left: 10, top: 10, right: 10, bottom: 10),
@@ -127,7 +131,7 @@ class _FirstPageState extends State<FirstPage> {
                                 Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceAround,
-                                      mainAxisSize: MainAxisSize.max,
+                                  mainAxisSize: MainAxisSize.max,
                                   children: [
                                     Text(_virusCases,
                                         style: TextStyle(
@@ -144,8 +148,7 @@ class _FirstPageState extends State<FirstPage> {
                                 Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceAround,
-
-                                      mainAxisSize: MainAxisSize.max,
+                                  mainAxisSize: MainAxisSize.max,
                                   children: [
                                     Text("Fälle",
                                         style: TextStyle(
@@ -175,10 +178,9 @@ class _FirstPageState extends State<FirstPage> {
               child: FloatingActionButton(
                 onPressed: () {
                   Navigator.of(context)
-                      .push(MaterialPageRoute(
-                          builder: (context) => Districts()))
+                      .push(
+                          MaterialPageRoute(builder: (context) => Districts()))
                       .then((value) => setState(() {}));
-                  
                 },
                 child: Icon(Icons.add),
               ),

@@ -29,6 +29,8 @@ dependencies:
   hive_flutter: ^0.3.1
   latinize: '>=0.0.1 <1.0.0'
   shared_preferences: ^0.5.12+4
+  introduction_screen: ^1.0.7
+  intro_views_flutter: '^2.8.2'
   flutter:
     sdk: flutter
 
@@ -50,7 +52,8 @@ dev_dependencies:
 
 # The following section is specific to Flutter.
 flutter:
-
+  assets:
+    - assets/images/
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
