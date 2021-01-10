@@ -160,3 +160,6 @@ class _DistrictsState extends State<Districts> {
   }
 }
 ```
+
+# Todo
+https://developer.android.com/studio/build/shrink-code#native-crash-support
