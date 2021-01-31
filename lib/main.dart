@@ -57,8 +57,8 @@ class _ViroAppState extends State<ViroApp> {
         image: Image.asset("assets/images/DSGVO.jpg"),
         title: "DSGVO und Kontakt",
         body:
-            "Falls du mich kontaktieren willst, kannst du mir gerne eine Mail an virometerapp@gmail.com schicken \n \n Hier der DSGVO Kram:\nhttps://github.com/Domepo/txt/blob/main/VirometerDSGVO.md",
-        footer: Text("Ein Projekt von Dominik Teichröb"),
+            "Falls du mich kontaktieren willst, kannst du mir gerne eine Mail an virometerapp@gmail.com schicken \n \n Hier der DSGVO Kram:\nhttps://github.com/Domepo/virometer/blob/main/.github/txt/VirometerDSGVO.md",
+        footer: Text("Virometer"),
       ),
     ];
   }
