@@ -44,7 +44,6 @@ class _SelectBoxDistrctsState extends State<SelectBoxDistrcts> {
       //
       // Checkboxes
       //
-
       child: CheckboxListTile(
           title: Text(widget._districtName,
               style: TextStyle(fontSize: 25, color: Color(0xff6E6E6E))),

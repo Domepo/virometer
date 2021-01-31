@@ -11,6 +11,7 @@ https://npgeo-corona-npgeo-de.hub.arcgis.com/datasets/917fc37a709542548cc3be077a
 https://services7.arcgis.com/mOBPykOjAyBO2ZKk/arcgis/rest/services/RKI_Landkreisdaten/FeatureServer/0/query?where=1%3D1&outFields=cases,deaths,county&returnGeometry=false&outSR=4326&f=json
 # Navigator 
 https://github.com/flutter/flutter/issues/36530
+https://github.com/aagarwal1012/IntroViews-Flutter/blob/master/example/lib/main.dart
 ```javascript
 e.g
           // Column(children: [
@@ -159,3 +160,6 @@ class _DistrictsState extends State<Districts> {
   }
 }
 ```
+
+# Todo
+https://developer.android.com/studio/build/shrink-code#native-crash-support

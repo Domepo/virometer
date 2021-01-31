@@ -74,7 +74,7 @@ class SelectBox extends StatelessWidget {
                     fontSize: 13,
                     color: Color(0xff3A0CA3),
                   )),
-              Text("Tode",
+              Text("Tote",
                   style: TextStyle(
                     fontSize: 13,
                     color: Color(0xff3A0CA3),
